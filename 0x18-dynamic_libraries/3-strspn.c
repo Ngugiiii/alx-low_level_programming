@@ -1,24 +1,29 @@
 #include "main.h"
-
 /**
  * _strspn - Entry point
  * @s: input
  * @accept: input
- * Return: number of bytes in the initial segment of s which are in accept
+ * Return: Always 0 (Success)
  */
 unsigned int _strspn(char *s, char *accept)
 {
 	unsigned int n = 0;
-	char *p;
+	int r;
 
-	for (; *s; s++)
+	while (*s)
 	{
-		for (p = accept; *p && *p != *s; p++)
-			;
-		if (*p == '\0')
-			return (n);
-
-		n++;
+		for (r = 0; accept[r]; r++)
+		{
+			if (*s == accept[r])
+			{
+				n++;
+				break;
+			}
+			else if (accept[r + 1] == '\0')
+				return (n);
+		}
+		s++;
 	}
 	return (n);
 }
+
